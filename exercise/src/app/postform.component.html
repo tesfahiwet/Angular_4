@@ -1,0 +1,45 @@
+<form [formGroup]="postForm" (ngSubmit)="onSubmit()">
+
+  Name: <input type="text" name="name" [formControl] = "postForm.controls['name']">
+  <div *ngIf="!postForm.controls['name'].valid">Required</div>
+  <br/><br/>
+  Email: <input type="text" name="email" [formControl]="postForm.controls['email']">
+  <div *ngIf="!postForm.controls['email'].valid">Required</div>
+  <div *ngIf="postForm.controls['email'].hasError('invalid')">Error</div>
+
+  <br /><br />
+  Post: <textarea [formControl] = "postForm.controls['post']"></textarea>
+  <div *ngIf="!postForm.controls['post'].valid">Minimum Length 10</div>
+  <br /><br />
+  <button type="submit" [disabled]="!postForm.valid"> Submit</button>
+  <!-- <a [routerLink]="['thankyou']"></a> -->
+</form>
+
+<br />
+<button (click)="getData()">Get Data</button>
+
+
+<br /><br /><br /><br /><br /><br />
+
+<div class="container">
+    <div class="row">
+        <table class="table">
+            <thead class="thead-inverse">
+            <tr>
+                <th class="text-center">User ID</th>
+                <th class="text-center">ID</th>
+                <th class="text-center">Title</th>
+                <th class="text-center">Body</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let post of postsArray">
+                <td class="text-center" style="width: 15px;">{{post.userId}}</td>
+                <td class="text-center" style="width: 15px;">{{post.id}}</td>
+                <td class="text-center" style="width: 200px;">{{post.title}}</td>
+                <td class="text-center">{{post.body}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
